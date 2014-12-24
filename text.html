@@ -1,0 +1,34 @@
+<body></body>
+<script src="js/three.min.js" ></script>
+<script src="js/helvetiker_regular.typeface.js"></script>
+<script src="https://dl.dropboxusercontent.com/u/50158740/canvas_test/js/ubuntu_regular.typeface.js"></script>
+<script>
+  // This is where stuff in our game will happen:
+  var scene = new THREE.Scene();
+
+  // This is what sees the stuff:
+  var aspect_ratio = window.innerWidth / window.innerHeight;
+  var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
+  camera.position.z = 1000;
+  scene.add(camera);
+
+  // This will draw what the camera sees onto the screen:
+  //var renderer = new THREE.WebGLRenderer();
+  var renderer = new THREE.CanvasRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+  
+  var wrapper = new THREE.MeshNormalMaterial();
+  var shape = new THREE.SphereGeometry(100);
+  var center_marker = new THREE.Mesh(shape, wrapper);
+  scene.add(center_marker);
+
+  var shape = new THREE.TextGeometry("Saint-Étienne-du-Mont", {font: 'ubuntu'});
+  var wrapper = new THREE.MeshNormalMaterial({color: 0x00ff00});
+  var words = new THREE.Mesh(shape, wrapper);
+  words.position.set(-650, 150, 0);
+  scene.add(words);
+  
+  // Now, show what the camera sees on the screen:
+  renderer.render(scene, camera);
+</script>
